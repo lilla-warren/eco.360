@@ -3,6 +3,49 @@ from streamlit_drawable_canvas import st_canvas
 import qrcode
 from PIL import Image
 import io
+import streamlit as st
+from streamlit_drawable_canvas import st_canvas
+import qrcode
+from PIL import Image
+import io
+
+# 🛠️ This line must be at the top BEFORE any Streamlit commands
+st.set_page_config(page_title="Eco360 Interactive Mockup", layout="wide")
+
+# Now safe to run Streamlit code below
+st.markdown("""
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@google/model-viewer/dist/model-viewer.min.css">
+<script type="module" src="https://cdn.jsdelivr.net/npm/@google/model-viewer/dist/model-viewer.min.js"></script>
+<style>
+    model-viewer {
+        --progress-bar-color: #4CAF50;
+        --progress-bar-height: 5px;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        margin: 20px 0;
+        background-color: #f8f9fa;
+    }
+    .model-container {
+        width: 100%;
+        height: 500px;
+        position: relative;
+    }
+    .ar-button {
+        background-color: #4CAF50;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 5px;
+        cursor: pointer;
+        position: absolute;
+        bottom: 20px;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+</style>
+""", unsafe_allow_html=True)
+
+st.title("🛋️ Eco360: Sustainable Furniture Mockups")
 
 # Initialize ModelViewer
 st.markdown("""
