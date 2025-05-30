@@ -51,7 +51,7 @@ furniture_items = {
         "materials": "Recycled fabric, reclaimed wood"
     },
     "Ergonomic Chair": {
-        "image": "https://i.imgur.com/p4QqX9t.jpg",
+        "image": "https://www.bing.com/images/search?view=detailV2&ccid=yxLSqFUw&id=501A2F5EDF8384262E9E7B75920FC86AC65A41BD&thid=OIP.yxLSqFUw499Hvz2NG-clqwHaHa&mediaurl=https%3a%2f%2fhomestratosphere.s3.amazonaws.com%2fwp-content%2fuploads%2f2014%2f12%2farmchairs.jpeg&cdnurl=https%3a%2f%2fth.bing.com%2fth%2fid%2fR.cb12d2a85530e3df47bf3d8d1be725ab%3frik%3dvUFaxmrID5J1ew%26pid%3dImgRaw%26r%3d0&exph=1600&expw=1600&q=chair+pic&simid=607999514306231093&FORM=IRPRST&ck=68C5D8E24D3E7495EAD40F3E257F7FB6&selectedIndex=0&itb=0&idpp=overlayview&ajaxhist=0&ajaxserp=0g",
         "3d_model": "https://modelviewer.dev/shared-assets/models/chair.glb",
         "price": 450,
         "materials": "Bamboo, organic cotton"
