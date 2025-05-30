@@ -1,6 +1,4 @@
 # app.py
-pip install streamlit-drawable-canvas
-
 import streamlit as st
 from streamlit_drawable_canvas import st_canvas
 import qrcode
