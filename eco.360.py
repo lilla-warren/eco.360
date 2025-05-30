@@ -1,5 +1,4 @@
-git add requirements(3).txt
-git commit -m "Fix: Correct requirements file name"
+
 # app.py
 import streamlit as st
 from streamlit_drawable_canvas import st_canvas
