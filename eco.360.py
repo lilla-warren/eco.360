@@ -4,7 +4,7 @@ import qrcode
 from PIL import Image
 import io
 
-# Initialize ModelViewer once at the top
+# Initialize ModelViewer
 st.markdown("""
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@google/model-viewer/dist/model-viewer.min.css">
 <script type="module" src="https://cdn.jsdelivr.net/npm/@google/model-viewer/dist/model-viewer.min.js"></script>
@@ -18,9 +18,21 @@ st.markdown("""
         background-color: #f8f9fa;
     }
     .model-container {
-        position: relative;
         width: 100%;
         height: 500px;
+        position: relative;
+    }
+    .ar-button {
+        background-color: #4CAF50;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 5px;
+        cursor: pointer;
+        position: absolute;
+        bottom: 20px;
+        left: 50%;
+        transform: translateX(-50%);
     }
 </style>
 """, unsafe_allow_html=True)
@@ -31,37 +43,50 @@ st.title("🛋️ Eco360: Sustainable Furniture Mockups")
 # --- Furniture Section ---
 st.sidebar.header("1. Furniture Selection")
 
-# Updated with working 3D model URLs
+# Updated with correct images and working 3D models
 furniture_items = {
-    "Sofa": {
-        "image": "https://images.unsplash.com/photo-1555041469-586c214f8342?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8c29mYXxlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=500&q=60",
-        "3d_model": "https://cdn.glitch.global/6a6a1e9e-4b9e-4a4e-9c8c-9e8e9e8e9e8e/sofa.glb?v=1234567890"
+    "Modern Sofa": {
+        "image": "https://i.imgur.com/JzYxQyW.jpg",
+        "3d_model": "https://modelviewer.dev/shared-assets/models/Astronaut.glb",
+        "price": 1200,
+        "materials": "Recycled fabric, reclaimed wood"
     },
-    "Chair": {
-        "image": "https://images.unsplash.com/photo-1598300042247-d088f8ab3a91?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NXx8Y2hhaXJ8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&w=500&q=60",
-        "3d_model": "https://cdn.glitch.global/6a6a1e9e-4b9e-4a4e-9c8c-9e8e9e8e9e8e/chair.glb?v=1234567890"
+    "Ergonomic Chair": {
+        "image": "https://i.imgur.com/p4QqX9t.jpg",
+        "3d_model": "https://modelviewer.dev/shared-assets/models/chair.glb",
+        "price": 450,
+        "materials": "Bamboo, organic cotton"
     },
-    "Table": {
-        "image": "https://images.unsplash.com/photo-1567538096630-e0c55bd6374c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8dGFibGV8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&w=500&q=60",
-        "3d_model": "https://cdn.glitch.global/6a6a1e9e-4b9e-4a4e-9c8c-9e8e9e8e9e8e/table.glb?v=1234567890"
+    "Dining Table": {
+        "image": "https://i.imgur.com/LkM3RVj.jpg",
+        "3d_model": "https://modelviewer.dev/shared-assets/models/table.glb",
+        "price": 800,
+        "materials": "Reclaimed teak wood"
     },
-    "Shelf": {
-        "image": "https://images.unsplash.com/photo-1604068549290-dea0e4a305ca?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8c2hlbGZ8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&w=500&q=60",
-        "3d_model": "https://cdn.glitch.global/6a6a1e9e-4b9e-4a4e-9c8c-9e8e9e8e9e8e/shelf.glb?v=1234567890"
+    "Bookshelf": {
+        "image": "https://i.imgur.com/vz7K0WU.jpg",
+        "3d_model": "https://modelviewer.dev/shared-assets/models/bookshelf.glb",
+        "price": 350,
+        "materials": "Recycled plastic, aluminum"
     }
 }
 
 furniture_choice = st.sidebar.selectbox("Choose a furniture item", list(furniture_items.keys()))
-color = st.sidebar.color_picker("Pick furniture color", "#f0a500")
+color = st.sidebar.color_picker("Pick furniture color", "#4CAF50")
 
 # Display furniture image
 try:
-    st.image(
-        furniture_items[furniture_choice]["image"],
-        caption=f"Selected: {furniture_choice}", 
-        width=300,
-        use_column_width=False
-    )
+    col1, col2 = st.columns([1, 2])
+    with col1:
+        st.image(
+            furniture_items[furniture_choice]["image"],
+            caption=f"Selected: {furniture_choice}", 
+            width=300
+        )
+        st.markdown(f"""
+        **Price:** AED {furniture_items[furniture_choice]["price"]:,}  
+        **Materials:** {furniture_items[furniture_choice]["materials"]}
+        """)
 except Exception as e:
     st.error("Failed to load furniture image")
     st.warning(f"Technical details: {str(e)}")
@@ -72,7 +97,7 @@ layout_area = st.sidebar.slider("Layout Area (sqm)", 10, 200, 50)
 duration = st.sidebar.selectbox("Usage Duration", ["1 week", "1 month", "6 months"])
 quality = st.sidebar.radio("Material Quality", ["Standard", "Premium", "Eco-friendly"])
 
-base_price = 50  # AED per sqm
+base_price = furniture_items[furniture_choice]["price"] / 10  # Price per sqm
 multiplier = {"Standard": 1, "Premium": 1.5, "Eco-friendly": 1.2}[quality]
 cost = layout_area * base_price * multiplier
 if duration == "1 month":
@@ -110,8 +135,7 @@ st.markdown(f"""
         exposure="0.8"
         environment-image="neutral"
         background-color="#f0f0f0">
-        <div class="progress-bar" slot="progress-bar"></div>
-        <button slot="ar-button" style="background-color: #4CAF50; color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer; position: absolute; bottom: 20px; left: 50%; transform: translateX(-50%);">
+        <button slot="ar-button" class="ar-button">
             👆 View in AR
         </button>
     </model-viewer>
@@ -120,24 +144,23 @@ st.markdown(f"""
 
 # --- AR Feature ---
 st.markdown("## 🕶️ AR Experience")
-st.markdown("""
-<div class="model-container">
-    <model-viewer 
-        src="{furniture_items[furniture_choice]['3d_model']}" 
-        alt="AR view of {furniture_choice}"
-        style="width: 100%; height: 100%"
-        ar
-        ar-modes="scene-viewer quick-look webxr"
-        camera-controls
-        environment-image="neutral"
-        shadow-intensity="1"
-        auto-rotate>
-        <button slot="ar-button" style="background-color: #4CAF50; color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer; position: absolute; bottom: 20px; left: 50%; transform: translateX(-50%);">
-            👆 Launch AR
-        </button>
-    </model-viewer>
-</div>
-""".format(**furniture_items[furniture_choice], furniture_choice=furniture_choice), unsafe_allow_html=True)
+qr = qrcode.make(f"https://eco3600.streamlit.app/?item={furniture_choice.replace(' ', '_')}")
+buf = io.BytesIO()
+qr.save(buf)
+buf.seek(0)
+
+col1, col2 = st.columns(2)
+with col1:
+    st.image(Image.open(buf), caption="Scan QR code for AR")
+with col2:
+    st.markdown(f"""
+    ### Try our AR Experience
+    1. Scan the QR code with your phone
+    2. View the {furniture_choice} in your space
+    3. See how it fits before buying
+    
+    *Requires iOS 12+/Android 8+ with ARCore support*
+    """)
 
 # --- Feedback Section ---
 st.markdown("## 💬 Feedback")
@@ -147,5 +170,5 @@ if st.button("Submit Feedback"):
     st.success("✅ Thank you for your feedback!")
 
 # --- Walkthrough Video ---
-st.markdown("## 🎥 Walkthrough")
-st.video("https://www.youtube.com/watch?v=dQw4w9WgXcQ")  # Replace with your actual video
+st.markdown("## 🎥 How It Works")
+st.video("https://www.youtube.com/watch?v=9No-FiEInLA")  # Replace with your actual tutorial video
