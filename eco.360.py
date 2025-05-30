@@ -37,7 +37,6 @@ st.markdown("""
 </style>
 """, unsafe_allow_html=True)
 
-st.set_page_config(page_title="Eco360 Interactive Mockup", layout="wide")
 st.title("🛋️ Eco360: Sustainable Furniture Mockups")
 
 # --- Furniture Section ---
