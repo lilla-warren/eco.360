@@ -1,5 +1,4 @@
 
-# app.py
 import streamlit as st
 from streamlit_drawable_canvas import st_canvas
 import qrcode
@@ -12,14 +11,27 @@ st.title("🛋️ Eco360: Sustainable Furniture Mockups")
 # --- Furniture Section ---
 st.sidebar.header("1. Furniture Selection")
 furniture_items = {
-    "Sofa": "assets/furniture_images/sofa.jpg",
-    "Chair": "assets/furniture_images/chair.jpg",
-    "Table": "assets/furniture_images/table.jpg",
-    "Shelf": "assets/furniture_images/shelf.jpg"
+    "Sofa": "https://images.unsplash.com/photo-1555041469-586c214f8342?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8c29mYXxlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=500&q=60",
+    "Chair": "https://images.unsplash.com/photo-1598300042247-d088f8ab3a91?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NXx8Y2hhaXJ8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&w=500&q=60",
+    "Table": "https://images.unsplash.com/photo-1567538096630-e0c55bd6374c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8dGFibGV8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&w=500&q=60",
+    "Shelf": "https://images.unsplash.com/photo-1604068549290-dea0e4a305ca?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8c2hlbGZ8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&w=500&q=60"
 }
+
 furniture_choice = st.sidebar.selectbox("Choose a furniture item", list(furniture_items.keys()))
 color = st.sidebar.color_picker("Pick furniture color", "#f0a500")
-st.image(furniture_items[furniture_choice], caption=f"Selected: {furniture_choice}", width=300)
+
+# Display furniture image with error handling
+try:
+    st.image(
+        furniture_items[furniture_choice],
+        caption=f"Selected: {furniture_choice}", 
+        width=300,
+        use_column_width=False
+    )
+except Exception as e:
+    st.error("Failed to load furniture image")
+    st.warning(f"Technical details: {str(e)}")
+    st.info("Please try again later or contact support")
 
 # --- Cost Estimator ---
 st.sidebar.header("2. Cost Estimator")
@@ -77,20 +89,6 @@ if st.button("Submit Feedback"):
 
 # --- Walkthrough Video ---
 st.markdown("## 🎥 Walkthrough")
-st.video("assets/videos/walkthrough.mp4")
-import os
-from pathlib import Path
-
-# Get the directory where the script is located
-script_dir = Path(images).parent
-
-furniture_items = {
-    "Chair": script_dir / "images" / "chair.jpeg",
-    "Table": script_dir / "images" / "table.jpeg",
-    # Add other items
-}
-
-# Verify files exist
-for name, path in furniture_items.items():
-    if not path.exists():
-        st.error(f"Image not found: {path}")
+# Using a YouTube video as example - replace with your own
+st.video("https://www.youtube.com/watch?v=dQw4w9WgXcQ")
+ 
