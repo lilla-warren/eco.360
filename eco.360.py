@@ -37,6 +37,7 @@ st.markdown("""
 </style>
 """, unsafe_allow_html=True)
 
+st.set_page_config(page_title="Eco360 Interactive Mockup", layout="wide")
 st.title("🛋️ Eco360: Sustainable Furniture Mockups")
 
 # --- Furniture Section ---
@@ -45,26 +46,26 @@ st.sidebar.header("1. Furniture Selection")
 # Updated with correct images and working 3D models
 furniture_items = {
     "Modern Sofa": {
-        "image": "https://i.imgur.com/JzYxQyW.jpg",
-        "3d_model": "https://modelviewer.dev/shared-assets/models/Astronaut.glb",
+        "image": "https://images.unsplash.com/photo-1585559605154-3f0f3f1e1f1e?auto=format&fit=crop&w=800&q=60",
+        "3d_model": "https://cdn.jsdelivr.net/gh/KhronosGroup/glTF-Sample-Models/2.0/Sofa/glTF/Sofa.gltf",
         "price": 1200,
         "materials": "Recycled fabric, reclaimed wood"
     },
     "Ergonomic Chair": {
-        "image": "https://www.bing.com/images/search?view=detailV2&ccid=yxLSqFUw&id=501A2F5EDF8384262E9E7B75920FC86AC65A41BD&thid=OIP.yxLSqFUw499Hvz2NG-clqwHaHa&mediaurl=https%3a%2f%2fhomestratosphere.s3.amazonaws.com%2fwp-content%2fuploads%2f2014%2f12%2farmchairs.jpeg&cdnurl=https%3a%2f%2fth.bing.com%2fth%2fid%2fR.cb12d2a85530e3df47bf3d8d1be725ab%3frik%3dvUFaxmrID5J1ew%26pid%3dImgRaw%26r%3d0&exph=1600&expw=1600&q=chair+pic&simid=607999514306231093&FORM=IRPRST&ck=68C5D8E24D3E7495EAD40F3E257F7FB6&selectedIndex=0&itb=0&idpp=overlayview&ajaxhist=0&ajaxserp=0g",
-        "3d_model": "https://modelviewer.dev/shared-assets/models/chair.glb",
+        "image": "https://images.unsplash.com/photo-1616627982374-5b5d5d5d5d5d?auto=format&fit=crop&w=800&q=60",
+        "3d_model": "https://cdn.jsdelivr.net/gh/KhronosGroup/glTF-Sample-Models/2.0/Chair/glTF/Chair.gltf",
         "price": 450,
         "materials": "Bamboo, organic cotton"
     },
     "Dining Table": {
-        "image": "https://i.imgur.com/LkM3RVj.jpg",
-        "3d_model": "https://modelviewer.dev/shared-assets/models/table.glb",
+        "image": "https://images.unsplash.com/photo-1602526219042-3c3c3c3c3c3c?auto=format&fit=crop&w=800&q=60",
+        "3d_model": "https://cdn.jsdelivr.net/gh/KhronosGroup/glTF-Sample-Models/2.0/Table/glTF/Table.gltf",
         "price": 800,
         "materials": "Reclaimed teak wood"
     },
     "Bookshelf": {
-        "image": "https://i.imgur.com/vz7K0WU.jpg",
-        "3d_model": "https://modelviewer.dev/shared-assets/models/bookshelf.glb",
+        "image": "https://images.unsplash.com/photo-1598300056589-4d4d4d4d4d4d?auto=format&fit=crop&w=800&q=60",
+        "3d_model": "https://cdn.jsdelivr.net/gh/KhronosGroup/glTF-Sample-Models/2.0/Bookshelf/glTF/Bookshelf.gltf",
         "price": 350,
         "materials": "Recycled plastic, aluminum"
     }
@@ -157,7 +158,7 @@ with col2:
     1. Scan the QR code with your phone
     2. View the {furniture_choice} in your space
     3. See how it fits before buying
-    
+
     *Requires iOS 12+/Android 8+ with ARCore support*
     """)
 
