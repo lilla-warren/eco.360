@@ -78,3 +78,19 @@ if st.button("Submit Feedback"):
 # --- Walkthrough Video ---
 st.markdown("## 🎥 Walkthrough")
 st.video("assets/videos/walkthrough.mp4")
+import os
+from pathlib import Path
+
+# Get the directory where the script is located
+script_dir = Path(images).parent
+
+furniture_items = {
+    "Chair": script_dir / "images" / "chair.jpeg",
+    "Table": script_dir / "images" / "table.jpeg",
+    # Add other items
+}
+
+# Verify files exist
+for name, path in furniture_items.items():
+    if not path.exists():
+        st.error(f"Image not found: {path}")
